@@ -7,7 +7,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import numpy as np
-
+from database import makeDatabase
+import sqlite3
 
 '''
 key:
@@ -20,15 +21,17 @@ l[4] = Profit
 
 data_names = ['Year', 'Rank', 'Company', 'Revenue', 'Profit']
 
-import sqlite3
+# download data
+makeDatabase()
+
 db = sqlite3.connect('lab.db')
 cur = db.cursor()
 
 # Validate shape of database table using dataframe
-# cur.execute(f'''SELECT * FROM Lab JOIN {data_names[2]} ON Lab.{data_names[2]} = {data_names[2]}.id''')
-# data_df = pd.DataFrame(cur.fetchall())
+cur.execute(f'''SELECT * FROM Lab JOIN {data_names[2]} ON Lab.{data_names[2]} = {data_names[2]}.id''')
+data_df = pd.DataFrame(cur.fetchall())
 
-# print('The shape of the dataframe is:', data_df.shape) # tuple of (number of rows, number of columns)
+print('The shape of the dataframe is:', data_df.shape) # tuple of (number of rows, number of columns)
 
 cur.execute(f'''SELECT Lab.{data_names[0]}, Lab.{data_names[1]}, {data_names[2]}.{data_names[2]}, Lab.{data_names[3]}, Lab.{data_names[4]}  FROM Lab JOIN {data_names[2]}
                          ON Lab.{data_names[2]} = {data_names[2]}.id

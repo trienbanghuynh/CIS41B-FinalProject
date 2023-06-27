@@ -1,6 +1,5 @@
 # Authors: Marcel Gunadi, Trien Bang Huynh and Minh Duc Vo
-
-from torch import nn
+import json
 import numpy as np
 import pandas as pd
 import sqlite3
@@ -208,7 +207,10 @@ def makeDatabase(dbName = "lab.db"):
     cur.execute(f'''INSERT INTO Lab
           ({data_names[0]}, {data_names[1]}, {data_names[2]}, {data_names[3]}, {data_names[4]})
           VALUES ( ?, ?, ?, ?, ? )''', (row[0], row[1], val, row[3], row[4]) )
-
+          
+  value = np.array(data_df[[data_names[0], data_names[1], data_names[3], data_names[4]]], dtype = np.float32).T.tolist()
+  with open('values.json', 'w') as f:
+      json.dump(value, f)
 
 
   db.commit()

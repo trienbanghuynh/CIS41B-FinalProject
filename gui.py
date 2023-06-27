@@ -11,20 +11,16 @@ from vector import Vector
 import sqlite3
 import numpy as np
 import json
-from database import makeDatabase
+
 
 class MainWin(tk.Tk):
     '''
-    The main class will display tution statistic of states and interact with users to view the plots and process their choices
+
     '''
-  
     DB = 'lab.db'
     def __init__(self):
         super().__init__()
         self.title("Final project")
-
-        makeDatabase(self.DB)
-
         self._plotter = Plotter()
         self._vector = Vector()
         self._scatterSelection = ()
