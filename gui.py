@@ -113,12 +113,12 @@ class MainWin(tk.Tk):
 
         
         retInputNp = np.array(retInput)
-        print(retInputNp)
+        # print(retInputNp)
 
 
         bestEstimate = None
         
-        print(self._values.T[:, [0, 2, 3]])
+        # print(self._values.T[:, [0, 2, 3]])
         
         if dialogWin.isAngle(): # search by angle
             if dialogWin.isYearSel(): # with year selected
